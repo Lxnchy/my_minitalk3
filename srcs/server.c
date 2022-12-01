@@ -6,30 +6,29 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/01 17:03:06 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:42:40 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-int	g_i[9];
-
 static void	readbit(int b[9])
 {
-	int		res;
-	int		i;
+	int			res;
+	int			i;
 
 	i = -1;
 	res = 0;
 	while (++i < 9)
 		res = res * 2 + b[i];
-	ft_printf("%c", res);
+	ft_printf("%c\n", res);
 	return ;
 }
 
 static void	receive(int sign)
 {
 	static int	i = -1;
+	static int	g_i[9];
 
 	if (++i < 8)
 	{
