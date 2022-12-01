@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 17:47:14 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/01 17:48:28 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:52:23 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(res, (char *)s1, ft_strlen(s1) + 1);
 	ft_strlcat(&res[ft_strlen(s1)], (char *)s2, ft_strlen(s2) + 1);
 	return (res);
+}
+
+size_t	ft_strlcat(char *dest, char *src, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+
+	if (!src)
+		return (0);
+	j = ft_strlen(src);
+	if (!dest || size == 0)
+		return (j);
+	i = ft_strlen(dest);
+	k = 0;
+	if (size <= i)
+		j = j + size;
+	else
+		j = j + i;
+	while (i + 1 < size && src[k] != '\0')
+	{
+		dest[i] = src[k];
+		i++;
+		k++;
+	}
+	if (i < size)
+		dest[i] = '\0';
+	return (j);
 }

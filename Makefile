@@ -6,7 +6,7 @@
 #    By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 11:55:54 by jehubert          #+#    #+#              #
-#    Updated: 2022/11/30 18:58:39 by jehubert         ###   ########.fr        #
+#    Updated: 2022/12/01 17:51:27 by jehubert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SERV_SRCS = $(SRCS)/server.c
 CLIENT_SRCS = $(SRCS)/client.c
 
 P_SRCS = $(SRCS)/ft_printf.c $(SRCS)/ft_printf_utils.c $(SRCS)/ft_putchar_fd.c \
-$(SRCS)/ft_putnbr_fd.c $(SRCS)/ft_putstr_fd.c $(SRCS)/ft_strlen.c
+$(SRCS)/ft_putnbr_fd.c $(SRCS)/ft_putstr_fd.c $(SRCS)/ft_strlen.c $(SRCS)/minitalk_utils.c
 
 P_OBJS = $(patsubst %,$(OBJS)/%,$(notdir ${P_SRCS:.c=.o}))
 
