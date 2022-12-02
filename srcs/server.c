@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/02 12:23:12 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:36:00 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	receive(int sign)
 static void	sigusrone(int sg, siginfo_t *siginfo, void *context)
 {
 	receive(1);
+	(void)siginfo;
 	(void)context;
 	(void)sg;
 }

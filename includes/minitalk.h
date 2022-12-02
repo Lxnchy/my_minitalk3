@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:00:33 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/01 17:54:19 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:35:42 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			uintmaster(unsigned int nb);
 void		put_uint(unsigned int nb, int *i);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlcat(char *dest, char *src, size_t size);
 
 #endif
