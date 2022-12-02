@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/01 18:42:40 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:15:23 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ static void	receive(int sign)
 	}
 }
 
-static void	sigusrone(int sg)
+static void	sigusrone(int sg, siginfo_t *siginfo, void *context)
 {
 	receive(1);
+	(void)context;
 	(void)sg;
 }
 
@@ -58,16 +59,15 @@ static void	sigusrtwo(int sg)
 
 int	main(void)
 {
-	pid_t				server_pid;
 	struct sigaction	saone;
 	struct sigaction	satwo;
 
-	server_pid = getpid();
-	saone.sa_handler = &sigusrone;
+	saone.sa_sigaction = &sigusrone;
+	saone.sa_flags = SA_SIGINFO;
 	satwo.sa_handler = &sigusrtwo;
 	sigaction(SIGUSR1, &saone, NULL);
 	sigaction(SIGUSR2, &satwo, NULL);
-	ft_printf("%d\n", server_pid);
+	ft_printf("%d\n", getpid());
 	while (1)
 		;
 }
