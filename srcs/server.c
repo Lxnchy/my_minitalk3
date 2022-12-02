@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/02 12:36:00 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:54:01 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	readbit(int b[9])
 	res = 0;
 	while (++i < 9)
 		res = res * 2 + b[i];
-	ft_printf("%c\n", res);
+	ft_printf("%c", res);
 	return ;
 }
 
