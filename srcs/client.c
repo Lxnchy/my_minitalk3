@@ -37,47 +37,60 @@ static int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
+// static void	charbit(char c, char *avone)
+// {
+// 	int		bits[9];
+// 	int		i;
+
+// 	i = -1;
+// 	while (++i < 9)
+// 	{
+// 		bits[i] = c % 2;
+// 		c /= 2;
+// 	}
+// 	i = -1
+// 	while (++i < 9)
+// 	{
+// 		if (bits[i] == 1)
+// 			kill(ft_atoi(avone), SIGUSR1);
+// 		else
+// 			kill(ft_atoi(avone), SIGUSR2);
+// 		usleep(40);
+// 	}
+// 	return ;
+// }
+
 static void	charbit(char c, char *avone)
 {
 	int		bits[9];
 	int		i;
-	int		j;
 
 	i = -1;
-	j = -1;
 	while (++i < 9)
 	{
-		bits[i] = c % 2;
-		c /= 2;
-	}
-	while (++j < 9)
-	{
-		if (bits[j] == 1)
+		if (c % 2 == 1)
 			kill(ft_atoi(avone), SIGUSR1);
 		else
 			kill(ft_atoi(avone), SIGUSR2);
-		usleep(40);
+		usleep(100);
+		c /= 2;
 	}
 	return ;
 }
 
 static void	received(int sign)
 {
-	(void)sign;
-	ft_printf("MESSAGE RECEIVED");
+	if (sign == SIGUSR2)
+		ft_printf("MESSAGE RECEIVED");
+		exit ;
 }
 
 int	main(int ac, char **av)
 {
 	int	i;
-	struct sigaction	sa;
-
 
 	if (ac != 3)
 		return (ft_printf("2 args only !\n"));
-	sa.sa_handler = &received;
-	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &sa, NULL);
 	i = -1;
 	while (++i < (int)ft_strlen(av[2]))
 		charbit(av[2][i], av[1]);

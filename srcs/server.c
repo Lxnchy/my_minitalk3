@@ -14,14 +14,28 @@
 
 int client_pid = 0;
 
+static void	sendmsg()
+{
+	kill(client_pid, SIGUSR2);
+	//Print msg
+	//exit
+}
+
+static void	check_end(void)
+{
+	struct sigaction	sa;
+	struct sigaction	sb;
+
+	sa.sa_handler = &sendmsg;
+	sb.sa_handler = &check;
+	sigaction(SIGUSR1, &sb, NULL);
+}
+
 static void	readbit(int b[9])
 {
 	int			res;
 	int			i;
 
-	kill(client_pid, SIGUSR1);
-	usleep(500);
-	kill(client_pid, SIGUSR2);
 	i = -1;
 	res = 0;
 	while (++i < 9)
@@ -44,23 +58,16 @@ static void	receive(int sign)
 	}
 	else
 	{
-		i = -1;
 		readbit(g_i);
+		check_end();
+		i = -1;
 	}
 }
 
 static void	manage(int sign, siginfo_t *siginfo, void *context)
 {
-	struct sigaction	sa;
-
-	if (sign == SIGUSR1)
-	{
-		client_pid = siginfo->si_pid;
-		sa.sa_handler = &receive;
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
-	}
 	(void)context;
+	(void)siginfo;
 	(void)(sign);
 	while (1)
 		;
@@ -78,17 +85,3 @@ int	main(void)
 	while (1)
 		;
 }
-
-// static void	sigusrone(int sg, siginfo_t *siginfo, void *context)
-// {
-// 	receive(1);
-// 	(void)siginfo;
-// 	(void)context;
-// 	(void)sg;
-// }
-
-// static void	sigusrtwo(int sg)
-// {
-// 	receive(0);
-// 	(void)sg;
-// }
