@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:53:39 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/09 19:15:40 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/09 21:02:23 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ static void	charbit(char c, char *avone)
 	int		i;
 
 	i = -1;
+	(void)avone;
 	while (++i < 9)
 	{
 		if (c % 2 == 1)
 			kill(ft_atoi(avone), SIGUSR1);
 		else
 			kill(ft_atoi(avone), SIGUSR2);
-		usleep(100);
+		usleep(500);
 		c /= 2;
 	}
 	return ;
@@ -88,11 +89,11 @@ int	main(int ac, char **av)
 {
 	int	i;
 
-	kill(ft_atoi(av[1]), SIGUSR1);
-	usleep(300);
 	if (ac != 3)
 		return (ft_printf("2 args only !\n"));
 	i = -1;
+	kill(ft_atoi(av[1]), SIGUSR1);
+	usleep(3000);
 	while (++i < (int)ft_strlen(av[2]))
 		charbit(av[2][i], av[1]);
 	while(1)
