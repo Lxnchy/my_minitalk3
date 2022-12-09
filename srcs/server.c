@@ -6,30 +6,28 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/06 23:04:58 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:15:40 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-int client_pid = 0;
+// static void	sendmsg()
+// {
+// 	kill(client_pid, SIGUSR2);
+// 	//Print msg
+// 	//exit
+// }
 
-static void	sendmsg()
-{
-	kill(client_pid, SIGUSR2);
-	//Print msg
-	//exit
-}
+// static void	check_end(void)
+// {
+// 	struct sigaction	sa;
+// 	struct sigaction	sb;
 
-static void	check_end(void)
-{
-	struct sigaction	sa;
-	struct sigaction	sb;
-
-	sa.sa_handler = &sendmsg;
-	sb.sa_handler = &check;
-	sigaction(SIGUSR1, &sb, NULL);
-}
+// 	sa.sa_handler = &sendmsg;
+// 	sb.sa_handler = &check;
+// 	sigaction(SIGUSR1, &sb, NULL);
+// }
 
 static void	readbit(int b[9])
 {
@@ -40,7 +38,7 @@ static void	readbit(int b[9])
 	res = 0;
 	while (++i < 9)
 		res = res * 2 + b[i];
-	ft_printf("%c", res);
+	ft_printf("c", res);
 	return ;
 }
 
@@ -52,23 +50,33 @@ static void	receive(int sign)
 	if (++i < 8)
 	{
 		if (sign == SIGUSR1)
-			g_i[8 - i] = 1;
+			ft_printf("1\n");
+			// g_i[8 - i] = 1;
 		else
-			g_i[8 - i] = 0;
+			ft_printf("2\n");
+			// g_i[8 - i] = 0;
+		// ft_printf("coucou");
 	}
 	else
 	{
 		readbit(g_i);
-		check_end();
+		// check_end();
 		i = -1;
 	}
 }
 
 static void	manage(int sign, siginfo_t *siginfo, void *context)
 {
+	struct sigaction	sa2;
+	int					client_pid;
+
+	client_pid = siginfo->si_pid;
+	ft_printf("client pid : %d \n", client_pid);
+	sa2.sa_handler = &receive;
+	sigaction(SIGUSR1, &sa2, NULL);
+	sigaction(SIGUSR2, &sa2, NULL);
+	(void)sign;
 	(void)context;
-	(void)siginfo;
-	(void)(sign);
 	while (1)
 		;
 }
@@ -80,7 +88,7 @@ int	main(void)
 	sa.sa_sigaction = &manage;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
-	signal(SIGUSR2, SIG_IGN);
+	// signal(SIGUSR2, SIG_IGN);
 	ft_printf("%d\n", getpid());
 	while (1)
 		;

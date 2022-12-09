@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:53:39 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/06 23:04:18 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:15:40 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int	ft_atoi(const char *str)
 
 static void	charbit(char c, char *avone)
 {
-	int		bits[9];
 	int		i;
 
 	i = -1;
@@ -78,17 +77,19 @@ static void	charbit(char c, char *avone)
 	return ;
 }
 
-static void	received(int sign)
-{
-	if (sign == SIGUSR2)
-		ft_printf("MESSAGE RECEIVED");
-		exit ;
-}
+// static void	received(int sign)
+// {
+// 	if (sign == SIGUSR2)
+// 		ft_printf("MESSAGE RECEIVED");
+// 		exit ;
+// }
 
 int	main(int ac, char **av)
 {
 	int	i;
 
+	kill(ft_atoi(av[1]), SIGUSR1);
+	usleep(300);
 	if (ac != 3)
 		return (ft_printf("2 args only !\n"));
 	i = -1;
