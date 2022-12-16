@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:53:39 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/09 21:02:23 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:20:30 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,6 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (ft_printf("2 args only !\n"));
 	i = -1;
-	kill(ft_atoi(av[1]), SIGUSR1);
-	usleep(3000);
 	while (++i < (int)ft_strlen(av[2]))
 		charbit(av[2][i], av[1]);
-	while(1)
-		;
 }
