@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/16 19:24:14 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:25:57 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,6 @@ static void	receive(int sign, siginfo_t *siginfo, void *context)
 	}
 	(void)context;
 }
-
-// static void	manage(int sign, siginfo_t *siginfo, void *context)
-// {
-// 	struct sigaction	sa2;
-// 	// struct sigaction	sa3;
-// 	int					client_pid;
-
-// 	client_pid = siginfo->si_pid;
-// 	ft_printf("client pid : %d \n", client_pid);
-// 	sa2.sa_sigaction = &receive;
-// 	// sa3.sa_sigaction = &receive;
-// 	sigaction(SIGUSR1, &sa2, NULL);
-// 	sigaction(SIGUSR2, &sa2, NULL);
-// 	// signal(SIGUSR1, &receive);
-// 	// signal(SIGUSR2, &receive);
-// 	(void)sign;
-// 	(void)context;
-// }
 
 int	main(void)
 {
