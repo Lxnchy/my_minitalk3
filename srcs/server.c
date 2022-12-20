@@ -6,13 +6,13 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/16 19:25:57 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:27:46 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-int	client_pid;
+static int	client_pid = 0;
 
 static void	readbit(int b[9])
 {
@@ -32,7 +32,8 @@ static void	receive(int sign, siginfo_t *siginfo, void *context)
 	static int	i = -1;
 	static int	g_i[9];
 
-	client_pid = siginfo->si_pid;
+	if (!client_pid)
+		client_pid = siginfo->si_pid;
 	if (++i < 8)
 	{
 		if (sign == SIGUSR1)
@@ -43,7 +44,6 @@ static void	receive(int sign, siginfo_t *siginfo, void *context)
 	else
 	{
 		readbit(g_i);
-		// check_end();
 		i = -1;
 	}
 	(void)context;
