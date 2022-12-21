@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:53:39 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/21 17:51:26 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:08:15 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	checkserv()
 	sa.sa_sigaction = &pingpong;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
-	usleep(1000);
+	pause();
+	return ;
 }
 
 static void	charbit(char tosend, char *serverpid)
@@ -74,6 +75,7 @@ static void	charbit(char tosend, char *serverpid)
 		usleep(500);
 		tosend /= 2;
 	}
+	return ;
 }
 
 int	main(int ac, char **av)

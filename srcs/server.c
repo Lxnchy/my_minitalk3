@@ -6,7 +6,7 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:01:07 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/21 17:52:37 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:08:11 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ static void	readbit(int b[9])
 
 static void	finish(int sign)
 {
-	(void)sign;
-	ft_printf("FINISHED\n");
-	exit(1);
+	if (sign == SIGUSR2)
+	{
+		(void)sign;
+		ft_printf("FINISHED\n");
+		exit(1);
+	}
+	else
+		manage(0, 0, 0);
 }
 
 static void	check()
@@ -40,12 +45,14 @@ static void	check()
 	struct sigaction	cont;
 	struct sigaction	end;
 
+	kill(SIGUSR1, g_client_pid);
 	cont.sa_sigaction = &manage;
 	cont.sa_flags = 0;
 	end.sa_handler = &finish;
 	end.sa_flags = 0;
-	sigaction(SIGUSR1, &cont, NULL);
+	sigaction(SIGUSR1, &end, NULL);
 	sigaction(SIGUSR2, &end, NULL);
+	return ;
 }
 
 static void	receive(int sign)
