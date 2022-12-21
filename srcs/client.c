@@ -6,11 +6,14 @@
 /*   By: jehubert <jehubert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:53:39 by jehubert          #+#    #+#             */
-/*   Updated: 2022/12/21 13:13:08 by jehubert         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:00:49 by jehubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
+
+// static int	g_finished = 0;
+/* TODO : ADD SIGACTION SIGUSR1 & PINGPONG RESPONSE */
 
 static int	ft_atoi(const char *str)
 {
